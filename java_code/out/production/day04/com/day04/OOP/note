@@ -1,0 +1,80 @@
+super注意点：
+    1.super调用父类父类的构造方法，必须在构造方法的第一个
+    2.super只能出现在子类的方法或构造方法中
+    3.super和this不能同时调用构造方法
+
+this：
+    代表的对象不同：
+        this：本身调用者这个对象
+        super：代表父类对象的内容（方法或属性）
+    前提：
+        this：没有继承也可以使用
+        super：只有在继承中可以使用
+    构造方法：
+        this() :本类的构造
+        super():父类的构造
+
+重写：需要继承关系，子类重写父类方法
+    1.方法名必须相同
+    2.参数必须相同
+    3.修饰符：范围可以放大，但是不可以缩小        public > protected > default > private
+    4.抛出异常：范围可以被缩小，但是不可以被扩大     ClassNotFoundException(小范围) --> Exception(大范围)
+
+重写：子类的方法和父类一样，但是方法体不同
+为什么重写：
+    1.父类的方法子类不需要或者不适合
+    Alt + Insert  /override
+
+多态：
+    一个对象的实际类型是确定的
+        new Student;
+        new Person;
+    可以执行的引用类型就不确定了：父类的引用指向子类
+
+        //Student 能调用的方法都是自己的获知继承自父类的
+        Student s1 =  new Student();
+        //Person 父类型，可以指向子类，但是不能调用子类独有的方法
+        Person s2 =  new Student();
+
+        //对象能执行哪些方法，主要看对象左边的类型，与右边的关系不大 (都实例化了一个Student对象)
+        s1.print();     //s1是Student类，所以调用Student的方法
+        s2.eat();       //s2是Person类，所以调用Person的方法
+注意事项：
+    1.多态是方法的多态，属性没有多态。
+    2.父类和子类有联系  类型转换异常：ClassCastException
+    3.存在条件：继承关系，方法需要重写 父类引用指向子类对象！      Father f -> new son();
+
+    4.不能被重写的
+        1.static 方法不可以被重写，她属于类，不属于实例
+        2.final 常量；
+        3.private 方法；
+
+instanceof（比较两边是否有继承关系，有关系是true，否则是false）
+
+    //        Object >> String
+    //        Object >> Person >> Student
+    //        Object >> Person >> Teacher
+
+            Object object =  new Student();
+            System.out.println(object instanceof Object);
+            System.out.println(object instanceof Person);
+            System.out.println(object instanceof Student);
+            System.out.println(object instanceof Teacher);
+            System.out.println(object instanceof String);
+
+            System.out.println("=======================");
+
+            Person person = new Student();
+            System.out.println(person instanceof Object);
+            System.out.println(person instanceof Person);
+            System.out.println(person instanceof Student);
+            System.out.println(person instanceof Teacher);
+    //        编译器报错(person 和 String没有关系，所以会报错)
+    //        System.out.println(person instanceof String);
+
+            System.out.println("=======================");
+
+            Student student = new Student();
+            System.out.println(student instanceof Object);
+            System.out.println(student instanceof Person);
+            System.out.println(student instanceof Student);
